@@ -3,7 +3,8 @@
 **Raspberry Pi Zero W**
 
 ( Raspberry Pi 0 Wireless, Wi-Fi / Bluetooth )
-( Tested v1.1 )
+
+( Tested v1.1 2016 )
 
 ## Setting up Pi Zero 1-Cable USB
 ### The quick way (No USB keyboard, mouse, HDMI monitor or adapters needed)    
