@@ -1,39 +1,61 @@
 #!/usr/bin/env python3
 NULL_CHAR = chr(0)
- 
-def write_report(report):
+keys = {
+  "a": NULL_CHAR*2+chr(4)+NULL_CHAR*5,
+  "b": NULL_CHAR*2+chr(5)+NULL_CHAR*5,
+  "c": NULL_CHAR*2+chr(6)+NULL_CHAR*5,
+  "d": NULL_CHAR*2+chr(7)+NULL_CHAR*5,
+  "e": NULL_CHAR*2+chr(8)+NULL_CHAR*5,
+  "f": NULL_CHAR*2+chr(9)+NULL_CHAR*5,
+  "enter": NULL_CHAR*2+chr(40)+NULL_CHAR*5,
+  "space": NULL_CHAR*2+chr(44)+NULL_CHAR*5,
+  "one": NULL_CHAR*8,
+  "all": NULL_CHAR*8
+}
+
+def press(key, shift=False):
+    if shift == True:
+      NULL_CHAR = chr(32) 
     with open('/dev/hidg0', 'rb+') as fd:
-        fd.write(report.encode())
+      fd.write(keys[key].encode())
+
+def release(key):
+    with open('/dev/hidg0', 'rb+') as fd:
+      if key == "one":
+        fd.write(keys[key].encode())
+      if key == "all":
+        fd.write(keys[key].encode())
  
 # Press a
-write_report(NULL_CHAR*2+chr(4)+NULL_CHAR*5)
+press("a")
 # Release keys
-write_report(NULL_CHAR*8)
+release("one")
+
 # Press SHIFT + a = A
-write_report(chr(32)+NULL_CHAR+chr(4)+NULL_CHAR*5)
- 
-# Press b
-write_report(NULL_CHAR*2+chr(5)+NULL_CHAR*5)
-# Release keys
-write_report(NULL_CHAR*8)
+press("a", True)
+release("one") 
+
 # Press SHIFT + b = B
-write_report(chr(32)+NULL_CHAR+chr(5)+NULL_CHAR*5)
- 
+press("b", True)
+release("one") 
+
 # Press SPACE key
-write_report(NULL_CHAR*2+chr(44)+NULL_CHAR*5)
+press("space", True)
+release("one")
  
 # Press c key
-write_report(NULL_CHAR*2+chr(6)+NULL_CHAR*5)
+press("c")
 # Press d key
-write_report(NULL_CHAR*2+chr(7)+NULL_CHAR*5)
+press("d")
  
 # Press RETURN/ENTER key
-write_report(NULL_CHAR*2+chr(40)+NULL_CHAR*5)
+press("enter")
  
 # Press e key
-write_report(NULL_CHAR*2+chr(8)+NULL_CHAR*5)
+press("e")
 # Press f key
-write_report(NULL_CHAR*2+chr(9)+NULL_CHAR*5)
+press("f")
  
 # Release all keys
-write_report(NULL_CHAR*8)
+release("all")
+
