@@ -7,11 +7,12 @@
 ( Tested v1.1 2016 )
 
 ## Setting up Pi Zero 1-Cable USB
+
 ### The quick way (No USB keyboard, mouse, HDMI monitor or adapters needed)    
 
 **More details** - [http://blog.gbaman.info/?p=791](http://blog.gbaman.info/?p=791)     
     
-For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required.
+For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required. **Make sure your USB cable works**. After setting the microSD card and connecting the Pi via USB, running `dmesg` on the host computer can help diagnose the connection.
 
 Windows computers must be running [Bonjour](https://support.apple.com/kb/DL999) (should be installed if iTunes or Quicktime is installed). Mac OS has Bonjour installed by default. Linux uses the Avahi Daemon. Ubuntu has it built-in, but you can check that it's running with: `sudo service avahi-daemon status`.
 
@@ -27,11 +28,13 @@ On Ubuntu 20.04, the config.txt file would be located at `/media/$USER/boot/conf
 **3.** If using a recent release of Jessie (Dec 2016 onwards), then create a new file simply called `ssh` in the SD card as well. On Ubuntu 20.04: `sudo touch /media/$USER/boot/ssh`. By default SSH is now disabled so this is required to enable it. **Remember** - Make sure your file doesn't have an extension (like .txt etc)!    
 
 ---
+
 THESE STEPS ARE DIFFERENT
 
 **4.** Finally, open up the `cmdline.txt`. Be careful with this file, it is very picky with its formatting! Each parameter is seperated by a single space (it does not use newlines). Insert `modules-load=dwc2,g_ether` after `rootwait`. To compare, an edited version of the `cmdline.txt` file at the time of writing, can be found [here](http://pastebin.com/WygSaptQ).    
 
 **5.** That's it, eject the SD card from your computer, put it in your Raspberry Pi Zero and connect it via USB to your computer. It will take up to 90s to boot up (shorter on subsequent boots). It should then appear as a USB Ethernet device. You can SSH into it using `raspberrypi.local` as the address.  
+
 ---
 
 Setup Headless Pi:
