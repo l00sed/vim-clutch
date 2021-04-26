@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+from gpiozero import Button
+from signal import pause
+
+left_pedal = Button(2)
+center_pedal = Button(3)
+right_pedal = Button(26)
+
 def buildKeyboard(shift=False):
     multiplier = 2
     null_chr = chr(0) # Standard character set
