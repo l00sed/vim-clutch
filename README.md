@@ -39,6 +39,13 @@ Install python3-pip on your Raspberry Pi:
 Install python requirements:
 `sudo pip3 install -r requirements.txt`
 
+**6.** Add python script to rc.local
+
+`sudo vim /etc/rc.local`
+
+Then add the following line before the end of the file:
+`python3 /home/pi/vim-clutch/vim-clutch.py`
+
 ---
 
 Other Resources:
