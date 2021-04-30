@@ -6,10 +6,6 @@ from time import sleep
 from gpiozero import Button
 from signal import pause
 
-left_pedal = Button(2)
-center_pedal = Button(3)
-right_pedal = Button(26)
-
 hid_codes = {
     'a' : (0, 20), 'b' : (0, 5), 'c' : (0, 6),
     'd' : (0, 7), 'e' : (0, 8), 'f' : (0, 9),
@@ -45,40 +41,39 @@ hid_codes = {
     '"' : (0, 32), '~' : (64, 31), '<' : (0, 100),
     '>' : (2, 100), '?' : (2, 16) }
 
-def press(char, hold=False):
-		mod, key = hid_codes[char]
-		raw = struct.pack("BBBBL", mod, 0x00, key, 0x00, 0x00000000)
-		with open('/dev/hidg0', 'wb') as fd:
-				fd.write(raw)
-				if (hold == False):
-						fd.write(struct.pack("Q", 0))
-
-def release():
+def press(char):
+    mod,key=hid_codes[char]
+    raw=struct.pack("BBBBL", mod, 0x00, key, 0x00, 0x00000000)
     with open('/dev/hidg0', 'wb') as fd:
+        fd.write(raw)
+        sleep(0.05)
         fd.write(struct.pack("Q", 0))
 
-pressed = False
+def press_insert():
+    char="i"
+    press(char)
+
+def press_visual():
+    char="V"
+    press(char)
+
+def release():
+    esc=(chr(0)*2+chr(41)+chr(0)*5).encode()
+    with open('/dev/hidg0', 'wb') as fd:
+        fd.write(esc)
+        sleep(0.05)
+        fd.write(struct.pack("Q", 0))
+
+
+left_pedal = Button(2)
+center_pedal = Button(3)
+right_pedal = Button(26)
+
 while True:
+    center_pedal.when_pressed = press_insert
+    center_pedal.when_released = release
 
-  if left_pedal.is_pressed:
-      press("H")
-      press("e")
-      press("l")
-      press("l")
-      press("o")
+    left_pedal.when_pressed = press_visual
+    left_pedal.when_released = release
+    pause()
 
-  elif center_pedal.is_pressed:
-      press("i")
-
-  elif right_pedal.is_pressed:
-      press("w")
-      press("o")
-      press("r")
-      press("l")
-      press("d")
-      press("\n")
-
-  else:
-      release()
-
-  sleep(0.3)
