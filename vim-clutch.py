@@ -53,6 +53,10 @@ def press_insert():
     char="i"
     press(char)
 
+def press_insert_new_line():
+    char="o"
+    press(char)
+
 def press_visual():
     char="V"
     press(char)
@@ -70,10 +74,14 @@ center_pedal = Button(3)
 right_pedal = Button(26)
 
 while True:
+    right_pedal.when_pressed = press_insert_new_line
+    right_pedal.when_released = release
+
     center_pedal.when_pressed = press_insert
     center_pedal.when_released = release
 
     left_pedal.when_pressed = press_visual
     left_pedal.when_released = release
+
     pause()
 
