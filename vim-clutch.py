@@ -58,7 +58,7 @@ def press_insert_new_line():
     press(char)
 
 def press_visual():
-    char="V"
+    char="v"
     press(char)
 
 def release():
