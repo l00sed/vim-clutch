@@ -7,12 +7,12 @@ from gpiozero import Button
 from signal import pause
 
 hid_codes = {
-    'a' : (0, 20), 'b' : (0, 5), 'c' : (0, 6),
+    'a' : (0, 4), 'b' : (0, 5), 'c' : (0, 6),
     'd' : (0, 7), 'e' : (0, 8), 'f' : (0, 9),
     'g' : (0, 10), 'h' : (0, 11), 'i' : (0, 12),
     'j' : (0, 13), 'k' : (0, 14), 'l' : (0, 15),
-    'm' : (0, 51), 'n' : (0, 17), 'o' : (0, 18),
-    'p' : (0, 19), 'q' : (0, 4), 'r' : (0, 21),
+    'm' : (0, 16), 'n' : (0, 17), 'o' : (0, 18),
+    'p' : (0, 19), 'q' : (0, 20), 'r' : (0, 21),
     's' : (0, 22), 't' : (0, 23), 'u' : (0, 24),
     'v' : (0, 25), 'w' : (0, 26), 'x' : (0, 27),
     'y' : (0, 28), 'z' : (0, 29), '1' : (2, 30),
@@ -23,7 +23,7 @@ hid_codes = {
     ' ' : (0, 44), '-' : (0, 35), '=' : (0, 46),
     '[' : (64, 34), ']' : (64, 45), '\\': (64, 37),
     ';' : (0, 54), '\'': (64, 33), '`' : (64, 36),
-    ',' : (0, 16), 'Esc:' : (2, 20), ':' : (0, 55),
+    ',' : (0, 51), 'Esc:' : (2, 20), ':' : (0, 55),
     '/' : (2, 55),
     'A' : (2, 4), 'B' : (2, 5), 'C' : (2, 6),
     'D' : (2, 7), 'E' : (2, 8), 'F' : (2, 9),
@@ -50,16 +50,16 @@ def press(char):
         sleep(0.05)
         fd.write(struct.pack("Q", 0))
 
-def press_insert():
+def press_insert_i():
     char="i"
     press(char)
 
-def press_insert_new_line():
+def press_insert_o():
     char="o"
     press(char)
 
-def press_visual():
-    char="A"
+def press_insert_a():
+    char="a"
     press(char)
 
 def release():
@@ -75,13 +75,13 @@ center_pedal = Button(3)
 right_pedal = Button(26)
 
 while True:
-    right_pedal.when_pressed = press_insert_new_line
+    right_pedal.when_pressed = press_insert_o
     right_pedal.when_released = release
 
-    center_pedal.when_pressed = press_insert
+    center_pedal.when_pressed = press_insert_i
     center_pedal.when_released = release
 
-    left_pedal.when_pressed = press_visual
+    left_pedal.when_pressed = press_insert_a
     left_pedal.when_released = release
 
     pause()
