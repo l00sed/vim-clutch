@@ -80,10 +80,10 @@ center_pedal = Button(3)
 right_pedal = Button(26)
 
 while True:
-    right_pedal.when_pressed = press_insert_o
+    right_pedal.when_pressed = press_insert_i
     right_pedal.when_released = release
 
-    center_pedal.when_pressed = press_insert_i
+    center_pedal.when_pressed = press_insert_o
     center_pedal.when_released = release
 
     left_pedal.when_pressed = press_insert_a
