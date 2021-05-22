@@ -8,13 +8,14 @@
 
 ## Setting up Pi Zero
 
-### HEADLESS (No USB keyboard, mouse, HDMI monitor or adapters needed)
+### HEADLESS
+#### (No USB keyboard, mouse, HDMI monitor or adapters needed)
 
 **More details** - [http://blog.gbaman.info/?p=791](http://blog.gbaman.info/?p=791)
 
-For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required. **Make sure your USB cable works**. After setting the microSD card and connecting the Pi via USB, running `dmesg` on the host computer can help diagnose the connection.
+For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required. **Make sure your USB cable works**. I used 2 faulty cables and wasted about 4 hours going down a dead-end rabbit hole. You should use a USB cable that transfers data, and isn't used just for charging. After flashing the microSD card and connecting the Pi via USB, running `dmesg` on the host computer can help diagnose the cable.
 
-Windows computers must be running [Bonjour](https://support.apple.com/kb/DL999) (should be installed if iTunes or Quicktime is installed). Mac OS has Bonjour installed by default. Linux uses the Avahi Daemon. Ubuntu has it built-in, but you can check that it's running with: `sudo service avahi-daemon status`.
+Windows computers must be running [Bonjour](https://support.apple.com/kb/DL999) (should be installed if iTunes or Quicktime is installed). Mac OS has Bonjour installed by default. Linux uses the Avahi Daemon. Ubuntu has it built-in, but you can check that it's running with: `sudo service avahi-daemon status`. This will let you use the `raspberrypi.local` address out-of-the-box.
 
 **1.** You'll need a microSD card reader or adapter. Plug it in. Use the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to install RaspberryPi OS onto the microSD card.
 
@@ -48,7 +49,7 @@ Then add the following line before the end of the file:
 
 ---
 
-Other Resources:
+Other Useful Resources:
 
 Setup Headless Pi:
 [Setup Headless Pi 0 WiFi](https://desertbot.io/blog/setup-pi-zero-w-headless-wifi)
